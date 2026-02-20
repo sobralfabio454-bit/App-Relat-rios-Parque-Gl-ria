@@ -80,3 +80,18 @@ with open(output_name, "rb") as f:
         file_name=output_name,
         mime="application/pdf"
     )
+# --- Dentro do seu loop 'for _, pub in data.iterrows():' ---
+            output_name = f"S21_{pub['Nome'].replace(' ', '_')}.pdf"
+            fillpdfs.write_fillable_pdf(uploaded_pdf.name, output_name, campos)
+            
+            st.success(f"✅ Gerado: {output_name}")
+            
+            # O BOTÃO DEVE FICAR AQUI DENTRO PARA RECONHECER O 'output_name'
+            with open(output_name, "rb") as f:
+                st.download_button(
+                    label=f"📥 Baixar Cartão de {pub['Nome']}",
+                    data=f,
+                    file_name=output_name,
+                    mime="application/pdf",
+                    key=f"btn_{pub['Nome']}" # Chave única para não dar erro
+                )
