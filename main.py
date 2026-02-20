@@ -16,10 +16,10 @@ class S21Automation:
     def conectar_google_sheets(self, sheet_id):
         scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
         creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
-        client = gspread.authorize(creds)
-        return client.open_by_key(sheet_id).sheet1
-
-    def processar_relatorios(self, df_meses, categoria):
+      import json
+# ... dentro do __init__ ou da função de conexão:
+creds_dict = st.secrets["gcp_service_account"]
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
         """
         Regra 1: Publicador soma estudos. 
         Pioneiros (Aux/Regular) somam estudos e horas.
