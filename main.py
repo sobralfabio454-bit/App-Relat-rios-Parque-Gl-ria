@@ -72,3 +72,11 @@ if sheet_id and uploaded_pdf:
             output_name = f"S21_{pub['Nome'].replace(' ', '_')}.pdf"
             fillpdfs.write_fillable_pdf(uploaded_pdf.name, output_name, campos)
             st.success(f"✅ Gerado: {output_name}")
+# Adicione isso logo após o st.success no seu main.py
+with open(output_name, "rb") as f:
+    st.download_button(
+        label=f"📥 Baixar Cartão de {pub['Nome']}",
+        data=f,
+        file_name=output_name,
+        mime="application/pdf"
+    )
